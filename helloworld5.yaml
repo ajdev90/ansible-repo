@@ -1,0 +1,12 @@
+---
+- name: Hello World with Sleep 5
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Print Hello World
+      debug:
+        msg: "Hello, World...5 !!!"
+
+    - name: Sleep for 10 seconds
+      pause:
+        seconds: 5
