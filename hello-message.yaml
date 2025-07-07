@@ -2,7 +2,7 @@
 ---
 - name: My first Ansible Hello World with variable input
   hosts: local
-  vars_prompt:
+  vars:
     - name: "my_message"
       prompt: "Please enter your custom message for the playbook:"
       private: no # Set to 'no' to show input on screen (for this example)
