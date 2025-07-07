@@ -4,8 +4,6 @@
   hosts: local
   vars:
     - name: "my_message"
-      prompt: "Please enter your custom message for the playbook:"
-      private: no # Set to 'no' to show input on screen (for this example)
 
   tasks:
     - name: Print the custom message
