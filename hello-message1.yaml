@@ -1,7 +1,7 @@
 # hello_world.yml
 ---
 - name: My first Ansible Hello World with variable input
-  hosts: local
+  hosts: localhost
   vars:
     - name: "my_message"
 
