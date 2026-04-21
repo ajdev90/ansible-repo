@@ -1,0 +1,19 @@
+---
+- name: Dump full inventory data
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Build inventory dict
+      set_fact:
+        full_inventory:
+          all:
+            children: "{{ groups.keys() | reject('eq', 'all') | reject('eq', 'ungrouped') | list | default([]) }}"
+            vars: "{{ hostvars[inventory_hostname] | dict2items | selectattr('key', 'match', '^(?!ansible_|groups|hostvars).*') | map(attribute='value') | list }}"
+          _meta:
+            hostvars: "{{ hostvars }}"
+
+    - name: Dump to JSON
+      copy:
+        content: "{{ full_inventory | to_nice_json }}"
+        dest: "{{ playbook_dir }}/inventory_dump.json"
