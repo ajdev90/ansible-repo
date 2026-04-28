@@ -1,0 +1,19 @@
+---
+- name: Log full inventory data to console
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Build inventory dict
+      set_fact:
+        full_inventory:
+          all:
+            children: "{{ groups.keys() | reject('eq', 'all') | reject('eq', 'ungrouped') | list | default([]) }}"
+            # Filters out internal Ansible vars to show only user-defined ones
+            vars: "{{ hostvars[inventory_hostname] | dict2items | selectattr('key', 'match', '^(?!ansible_|groups|hostvars).*') | list | items2dict }}"
+          _meta:
+            hostvars: "{{ hostvars }}"
+
+    - name: Display inventory data in console
+      debug:
+        var: full_inventory
