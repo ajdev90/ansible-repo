@@ -1,0 +1,5 @@
+# my_remote_inventory.yml
+plugin: awx.awx.controller
+host: http://clm-pun-su0nat.bmc.com
+token: "your-api-token"
+inventory_id: 4
